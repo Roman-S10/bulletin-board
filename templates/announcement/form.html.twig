@@ -1,0 +1,20 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    {% if id %}
+        Редактирование объявления<small>[{{ id }}]</small>
+    {% else %}
+        Добавление объявления
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+    {{ form_row(form.area, { label: 'Область' }) }}
+    {{ form_row(form.city, { label: 'Город' }) }}
+    {{ form_row(form.category, { label: 'Категория' }) }}
+    {{ form_row(form.title, { label: 'Заголовок' }) }}
+    {{ form_row(form.description, { label: 'Описание' }) }}
+    {{ form_row(form.save) }}
+    {{ form_end(form) }}
+{% endblock %}

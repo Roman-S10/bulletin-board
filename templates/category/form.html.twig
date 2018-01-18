@@ -1,0 +1,15 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    {% if id %}
+        Редактирование категории<small>[{{ id }}]</small>
+    {% else %}
+        Добавление категории
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+    {{ form_row(form.name, { label: 'Название' }) }}
+    {{ form_end(form) }}
+{% endblock %}

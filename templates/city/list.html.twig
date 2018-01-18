@@ -1,0 +1,10 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Список городов</h1>
+    <ul>
+        {% for city in cities %}
+            <li>{{ city.name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

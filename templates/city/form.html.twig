@@ -1,0 +1,15 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}
+    {% if id %}
+        Редактирование города<small>[{{ id }}]</small>
+    {% else %}
+        Добавление города
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {{ form_start(form) }}
+    {{ form_row(form.name, { label: 'Наименование' }) }}
+    {{ form_end(form) }}
+{% endblock %}

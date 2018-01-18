@@ -1,0 +1,10 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Список облостей</h1>
+    <ul>
+        {% for area in areas %}
+            <li>{{ area.name }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
