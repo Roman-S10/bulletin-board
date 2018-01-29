@@ -5,6 +5,8 @@ namespace App\Controller;
 
 use App\Entity\Area;
 use App\Form\AreaForm;
+use Pagerfanta\Adapter\DoctrineORMAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -43,7 +45,7 @@ class AreaController extends Controller
                 $em->flush();
                 $this->addFlash('success', $id ? 'Данные изменены.' : 'Данные сохранены');
 
-                return $this->redirectToRoute('area-list');
+                return $this->redirectToRoute('admin');
             }
         }
 

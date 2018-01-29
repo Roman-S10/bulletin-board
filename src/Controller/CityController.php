@@ -10,14 +10,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @Route("/city")
- */
+
 class CityController extends Controller
 {
     /**
-     * @Route("/create", name="city-create")
-     * @Route("/edit/{id}", name="city-edit")
+     * @Route("/city/create", name="city-create")
+     * @Route("/city/edit/{id}", name="city-edit")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -42,7 +40,7 @@ class CityController extends Controller
                 $em->flush();
                 $this->addFlash('success', $id ? 'Данные изменены.' : 'Данные сохранены');
 
-                return $this->redirectToRoute('city-list');
+                return $this->redirectToRoute('admin');
             }
         }
 
@@ -53,12 +51,23 @@ class CityController extends Controller
     }
 
     /**
-     * @Route("/", name="city-list")
+     * @Route("/city/{area}", name="city-list")
+     * @param Request $request
      * @return Response
      */
-    public function listAction()
+    public function listAction(Request $request)
     {
-        $cities = $this->getDoctrine()->getRepository(City::class)->findAll();
+        $area = $request->get('area');
+        $em = $this->getDoctrine()->getManager();
+
+        $qb = $em->createQueryBuilder('c')->select('c')
+            ->from('App:City', 'c')
+            ->where('c.deleteTime IS NULL');
+        $qb->andWhere('c.area = :area')
+            ->setParameter(':area', $area)
+            ->orderBy('c.name', 'ASC')
+        ;
+        $cities = $qb->getQuery()->getResult();
 
         return $this->render('city/list.html.twig', ['cities' => $cities]);
 

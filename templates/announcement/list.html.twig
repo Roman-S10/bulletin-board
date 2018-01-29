@@ -1,12 +1,16 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Объявления</h1>
-    <ul>
+    <h1 class="mb-3">Объявления</h1>
+    <ul class="list-group">
         {% for announcement in announcements %}
-            <li>
-                <h4>{{ announcement.title }}</h4>
-                <p>{{ announcement.description }}</p>
+            <li class="list-group-item">
+                <a href="{{ path('announcement-view', {'city': city, 'category' : category ,'id' : announcement.id}) }}">
+                    {{ announcement.title }}
+                </a>
+                <div class="text-muted">
+                    {{ announcement.createTime|date('d.m.Y')  }}
+                </div>
             </li>
         {% endfor %}
     </ul>

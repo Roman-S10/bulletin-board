@@ -10,14 +10,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @Route("/category")
- */
+
 class CategoryController extends Controller
 {
     /**
-     * @Route("/create", name="category-create")
-     * @Route("/edit/{id}", name="category-edit")
+     * @Route("/category/create", name="category-create")
+     * @Route("/category/edit/{id}", name="category-edit")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -26,23 +24,23 @@ class CategoryController extends Controller
         $em = $this->getDoctrine()->getManager();
         $id = $request->get('id');
 
-        $city = $id ? $em->find('App:Category', $id) : new Category();
+        $category = $id ? $em->find('App:Category', $id) : new Category();
 
         if (!$em) {
             throw new NotFoundHttpException();
         }
 
-        $form = $this->createForm(CategoryForm::class, $city);
+        $form = $this->createForm(CategoryForm::class, $category);
 
         if ($request->isMethod(Request::METHOD_POST)) {
             $form->handleRequest($request);
 
             if ($form->isValid()) {
-                $em->persist($city);
+                $em->persist($category);
                 $em->flush();
                 $this->addFlash('success', $id ? 'Данные изменены.' : 'Данные сохранены');
 
-                return $this->redirectToRoute('category-list');
+                return $this->redirectToRoute('admin');
             }
         }
 
@@ -53,14 +51,16 @@ class CategoryController extends Controller
     }
 
     /**
-     * @Route("/", name="category-list")
+     * @Route("/{city}/category", name="category-list")
+     * @param Request $request
      * @return Response
      */
-    public function listAction()
+    public function listAction(Request $request)
     {
         $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+        $city = $request->get('city');
 
-        return $this->render('category/list.html.twig', ['categories' => $categories]);
+        return $this->render('category/list.html.twig', ['categories' => $categories, 'city' => $city]);
 
     }
 }

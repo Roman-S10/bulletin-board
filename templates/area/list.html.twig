@@ -1,10 +1,15 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Список облостей</h1>
-    <ul>
-        {% for area in areas %}
-            <li>{{ area.name }}</li>
-        {% endfor %}
-    </ul>
+    <h1 class="mb-3">Список облостей</h1>
+    <div class="card">
+        <div class="card-body">
+            <ul class="list-inline">
+                {% for area in areas %}
+                    <li class="list-inline-item"><a href="{{ path('city-list', {'area' : area.id}) }}">{{ area.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
 {% endblock %}

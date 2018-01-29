@@ -2,9 +2,82 @@
 
 {% block body %}
     <body>
-        {% block content %}{% endblock %}
-        <footer>
-            <strong>&copy; bulletin-board, {{ 'now' | date('Y') }}</strong>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="/">Bulletin-board</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/">Главная<span class="sr-only"></span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('area-list') }}">Области</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+                        <li class="nav-item">
+                            <a class="btn btn-primary" href="{{ path('announcement-create') }}" role="button">Добавить объявление</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Войти</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container mt-2">
+
+            {% for message in app.session.flashBag.get('success') %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-success alert-dismissable" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ message }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% for message in app.session.flashBag.get('warning') %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-warning alert-dismissable" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ message }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% for message in app.session.flashBag.get('error') %}
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-danger alert-dismissable" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ message }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% block content %}{% endblock %}
+        </div>
+
+        <footer class="bd-footer text-muted bg-light">
+            <div class="container">
+                <strong>&copy; bulletin-board, {{ 'now' | date('Y') }}</strong>
+            </div>
         </footer>
     </body>
 

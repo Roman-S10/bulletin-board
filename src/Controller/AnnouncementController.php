@@ -10,14 +10,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 
-/**
- * @Route("/announcement")
- */
+
 class AnnouncementController extends Controller
 {
     /**
-     * @Route("/create", name="announcement-create")
-     * @Route("/edit/{id}", name="announcement-edit")
+     * @Route("/announcement/create", name="announcement-create")
+     * @Route("/announcement/edit/{id}", name="announcement-edit")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
@@ -25,6 +23,8 @@ class AnnouncementController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $id = $request->get('id');
+        $category = $request->get('category');
+        $city = $request->get('city');
 
         $announcement = $id ? $em->find('App:Announcement', $id) : new Announcement();
 
@@ -42,7 +42,7 @@ class AnnouncementController extends Controller
                 $em->flush();
                 $this->addFlash('success', $id ? 'Данные изменены.' : 'Данные сохранены');
 
-                return $this->redirectToRoute('announcement-list');
+                return $this->redirectToRoute('announcement-list', ['city' => $form['city']->getData(), 'category' => $form['category']->getData()]);
             }
         }
 
@@ -53,14 +53,45 @@ class AnnouncementController extends Controller
     }
 
     /**
-     * @Route("/", name="announcement-list")
+     * @Route("/{city}/{category}/announcement", name="announcement-list")
+     * @param Request $request
      * @return Response
      */
-    public function listAction()
+    public function listAction(Request $request)
     {
-        $announcements = $this->getDoctrine()->getRepository(Announcement::class)->findAll();
+        $category = $request->get('category');
+        $city = $request->get('city');
+        $em = $this->getDoctrine()->getManager();
 
-        return $this->render('announcement/list.html.twig', ['announcements' => $announcements]);
+        $qb = $em->createQueryBuilder('a')->select('a')
+            ->from('App:Announcement', 'a')
+            ->where('a.deleteTime IS NULL');
+        $qb->andWhere('a.category = :category')
+            ->setParameter(':category', $category)
+            ->orderBy('a.id', 'DESC')
+            ->andWhere('a.city = :city')
+            ->setParameter(':city', $city)
+        ;
+        $announcements = $qb->getQuery()->getResult();
+
+        return $this->render('announcement/list.html.twig', [
+            'announcements' => $announcements,
+            'city' => $city,
+            'category' => $category
+        ]);
+
+    }
+
+    /**
+     * @Route("/{city}/{category}/announcement/view/{id}", name="announcement-view")
+     * @param integer $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function viewAction($id)
+    {
+        $announcement = $this->getDoctrine()->getRepository(Announcement::class)->find($id);
+
+        return $this->render('announcement/view.html.twig', ['announcement' => $announcement]);
 
     }
 }

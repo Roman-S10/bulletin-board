@@ -1,10 +1,16 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <h1>Список городов</h1>
-    <ul>
-        {% for city in cities %}
-            <li>{{ city.name }}</li>
-        {% endfor %}
-    </ul>
+    <h1 class="mb-3">Список городов</h1>
+    <div class="card">
+        <div class="card-body">
+            <ul class="list-group">
+                {% for city in cities %}
+                    <li class="list-group-item">
+                        <a href="{{ path('category-list', {'city' : city.id}) }}">{{ city.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 {% endblock %}
