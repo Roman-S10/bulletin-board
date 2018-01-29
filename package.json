@@ -1,0 +1,35 @@
+{
+  "name": "bulletin-board",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Roman-S10/bulletin-board.git"
+  },
+  "author": "Roman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Roman-S10/bulletin-board/issues"
+  },
+  "homepage": "https://github.com/Roman-S10/bulletin-board#readme",
+  "devDependencies": {
+    "babel-core": "^6.13.2",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.13.2",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "bootstrap": "^4.0.0-beta.3",
+    "concurrently": "^3.5.0",
+    "css-loader": "^0.28.4",
+    "jquery": "^3.2.1",
+    "popper.js": "^1.12.9",
+    "style-loader": "^0.18.2",
+    "webpack": "^2.0.0"
+  }
+}

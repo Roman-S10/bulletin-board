@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1 class="mb-3">Admin</h1>
+    <div class="card">
+        <div class="card-body">
+            <a class="btn btn-primary" href="{{ path('area-create') }}" role="button">Добавить область</a>
+            <a class="btn btn-primary" href="{{ path('city-create') }}" role="button">Добавить город</a>
+            <a class="btn btn-primary" href="{{ path('category-create') }}" role="button">Добавить категорию</a>
+        </div>
+    </div>
+
+{% endblock %}
