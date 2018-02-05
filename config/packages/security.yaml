@@ -16,3 +16,6 @@ security:
 
             # form_login: ~
             # https://symfony.com/doc/current/security/form_login_setup.html
+    encoders:
+            App\Entity\User:
+                algorithm: bcrypt
