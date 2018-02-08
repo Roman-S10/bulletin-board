@@ -31,7 +31,7 @@ class City
     private $area;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Announcement", mappedBy="area")
+     * @ORM\OneToMany(targetEntity="App\Entity\Announcement", mappedBy="city")
      */
     private $announcements;
 

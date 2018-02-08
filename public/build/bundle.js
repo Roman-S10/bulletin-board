@@ -531,7 +531,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "/* Sticky footer styles\r\n-------------------------------------------------- */\r\nhtml {\r\n    position: relative;\r\n    min-height: 100%;\r\n}\r\nbody {\r\n    margin-bottom: 60px; /* Margin bottom by footer height */\r\n}\r\n.page-footer {\r\n    position: absolute;\r\n    bottom: 0;\r\n    width: 100%;\r\n    height: 60px; /* Set the fixed height of the footer here */\r\n    line-height: 60px; /* Vertically center the text there */\r\n}", ""]);
+exports.push([module.i, "/* Sticky footer styles\r\n-------------------------------------------------- */\r\nhtml {\r\n    position: relative;\r\n    min-height: 100%;\r\n}\r\nbody {\r\n    margin-bottom: 60px; /* Margin bottom by footer height */\r\n}\r\n.page-footer {\r\n    position: absolute;\r\n    bottom: 0;\r\n    width: 100%;\r\n    height: 60px; /* Set the fixed height of the footer here */\r\n    line-height: 60px; /* Vertically center the text there */\r\n}\r\n\r\n/* Form-login styles\r\n-------------------------------------------------- */\r\n\r\n.form-login {\r\n    width: 100%;\r\n    max-width: 330px;\r\n    padding: 15px;\r\n    margin: 0 auto;\r\n}", ""]);
 
 // exports
 

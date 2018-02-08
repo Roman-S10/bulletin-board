@@ -378,6 +378,8 @@ class User implements AdvancedUserInterface, \Serializable
     {
         return serialize(array(
             $this->id,
+            $this->username,
+            $this->password,
             $this->isActive
         ));
     }
@@ -386,6 +388,8 @@ class User implements AdvancedUserInterface, \Serializable
     {
         list (
             $this->id,
+            $this->username,
+            $this->password,
             $this->isActive
             ) = unserialize($serialized);
     }
