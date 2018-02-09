@@ -48,6 +48,11 @@ class User implements AdvancedUserInterface, \Serializable
     private $birthDate;
 
     /**
+     * @ORM\Column(type="string", length=255, unique=true)
+     */
+    private $email;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=32, nullable=false)
@@ -197,6 +202,28 @@ class User implements AdvancedUserInterface, \Serializable
     public function setBirthDate($birthDate)
     {
         $this->birthDate = $birthDate;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     *
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
 
         return $this;
     }
