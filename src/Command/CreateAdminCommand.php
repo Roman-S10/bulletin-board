@@ -21,6 +21,7 @@ class CreateAdminCommand extends ContainerAwareCommand
             ->addArgument('birthDate', InputArgument::REQUIRED)
             ->addArgument('username', InputArgument::REQUIRED)
             ->addArgument('password', InputArgument::REQUIRED)
+            ->addArgument('email', InputArgument::REQUIRED)
         ;
     }
 
@@ -47,12 +48,13 @@ class CreateAdminCommand extends ContainerAwareCommand
                     ->get('security.password_encoder')
                     ->encodePassword($user, $input->getArgument('password'))
             )
+            ->setEmail($input->getArgument('email'))
             ->setRoles(['ROLE_ADMIN'])
         ;
 
         $em->persist($user);
         $em->flush();
 
-        $output->writeln('User (' . $user->getUsername() . ') created.');
+        $output->writeln('User - ' . $user->getUsername() . ' created.');
     }
 }

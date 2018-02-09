@@ -31,5 +31,8 @@
     "popper.js": "^1.12.9",
     "style-loader": "^0.18.2",
     "webpack": "^2.0.0"
+  },
+  "dependencies": {
+    "bootstrap-datepicker": "^1.7.1"
   }
 }
