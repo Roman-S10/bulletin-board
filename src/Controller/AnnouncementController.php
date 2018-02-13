@@ -23,8 +23,6 @@ class AnnouncementController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $id = $request->get('id');
-        $category = $request->get('category');
-        $city = $request->get('city');
 
         $announcement = $id ? $em->find('App:Announcement', $id) : new Announcement();
 
@@ -40,9 +38,13 @@ class AnnouncementController extends Controller
             if ($form->isValid()) {
                 $em->persist($announcement);
                 $em->flush();
-                $this->addFlash('success', $id ? 'Данные изменены.' : 'Данные сохранены');
+                $this->addFlash('success', $id ? 'Объявление изменено' : 'Объявление добавлено');
 
-                return $this->redirectToRoute('announcement-list', ['city' => $form['city']->getData(), 'category' => $form['category']->getData()]);
+                return $this->redirectToRoute('announcement-list',
+                    [
+                        'city' => $form['city']->getData()->getId(),
+                        'category' => $form['category']->getData()->getId()
+                    ]);
             }
         }
 

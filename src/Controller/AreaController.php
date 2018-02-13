@@ -43,7 +43,7 @@ class AreaController extends Controller
             if ($form->isValid()) {
                 $em->persist($area);
                 $em->flush();
-                $this->addFlash('success', $id ? 'Данные изменены.' : 'Данные сохранены');
+                $this->addFlash('success', $id ? 'Данные изменены.' : 'Область добавлена');
 
                 return $this->redirectToRoute('admin');
             }

@@ -38,7 +38,7 @@ class CategoryController extends Controller
             if ($form->isValid()) {
                 $em->persist($category);
                 $em->flush();
-                $this->addFlash('success', $id ? 'Данные изменены.' : 'Данные сохранены');
+                $this->addFlash('success', $id ? 'Данные изменены.' : 'Категория добавлена');
 
                 return $this->redirectToRoute('admin');
             }

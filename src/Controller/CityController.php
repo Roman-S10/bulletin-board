@@ -38,7 +38,7 @@ class CityController extends Controller
             if ($form->isValid()) {
                 $em->persist($city);
                 $em->flush();
-                $this->addFlash('success', $id ? 'Данные изменены.' : 'Данные сохранены');
+                $this->addFlash('success', $id ? 'Данные изменены.' : 'Город добавлен');
 
                 return $this->redirectToRoute('admin');
             }
